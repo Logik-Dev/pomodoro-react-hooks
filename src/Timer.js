@@ -3,11 +3,10 @@ import styled from 'styled-components';
 
 const StyledTimer = styled.div`
   display: grid;
-  grid-template: repeat(8, 1fr) / repeat(5, 1fr);
-
+  grid-template: repeat(8, 1fr) / repeat(12, 1fr);
   .display{
     grid-row: 1 / 8;
-    grid-column: 1 / 6;
+    grid-column: 1 / 13;
     box-shadow: 0 5px 8px rgba(0,0,0,.3);
     width: 100%;
 
@@ -42,16 +41,22 @@ const StyledTimer = styled.div`
     }
   }
   #start_stop{
-    grid-column: 2;
+    grid-column: 4;
+    @media (min-width: 1024px){
+      grid-column: 5;
+    }
   };
   #reset{
-    grid-column: 4;
+    grid-column: 9;
+    @media (min-width: 1024px){
+      grid-column: 8;
+    }
   }
 
 `
 const Display = styled.div`
   background-color: #eee;
-  color: ${props => props.timeLeft <= 59 ? "red" : "yellowgreen"};
+  color: ${props => props.timeLeft <= 59 ? "red" : "green"};
   width: 300px;
   margin: 0 auto;
   display: flex;
@@ -61,6 +66,7 @@ const Display = styled.div`
   font-size: 5rem;
   border-radius: 8px;
   border-bottom: none;
+  border: 1px #ddd solid;
   #timer-label{
     font-size: 2rem;
   }
@@ -87,7 +93,7 @@ export default function Timer(props){
             <button onClick={props.startPause} id="start_stop">
                 {props.isRunning ? <i className="fas fa-pause" /> : <i className="fas fa-play" />}
             </button>
-            <button onClick={props.reset} id="reset">Reset</button>
+            <button onClick={props.reset} id="reset"><i className="fas fa-sync" /></button>
 
         </StyledTimer>
 
