@@ -65,7 +65,6 @@ const Display = styled.div`
   flex-direction: column;
   font-size: 5rem;
   border-radius: 8px;
-  border-bottom: none;
   border: 1px #ddd solid;
   #timer-label{
     font-size: 2rem;
