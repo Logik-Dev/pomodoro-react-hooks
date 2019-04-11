@@ -81,7 +81,7 @@ function App(props){
       // passing a null delay will not start interval
       if(delay !== null){
         const id = accurateInterval(callTick, 1000);
-        return () => id.clear();
+        return () => id.cancel();
       }
     }, delay)
   }
