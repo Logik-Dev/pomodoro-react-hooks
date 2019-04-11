@@ -38,7 +38,7 @@ const Footer = styled.footer`
   text-align: right;
   a{
     text-decoration: none;
-    color: inherit;
+    color: deeppink;
   }
 `
 
