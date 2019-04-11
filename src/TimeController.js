@@ -31,7 +31,7 @@ const StyledTimeController = styled.div`
 export default function TimeController(props) {
     return(
       <StyledTimeController id={props.type+"-label"} type={props.type}>
-            <h3 className="header">{props.type} Time:</h3>
+            <h3 className="header">{props.type} time:</h3>
             <div className="time-control">
               <i className="fas fa-plus" id={props.type+"-increment"} onClick={props.inc}/>
               <span className="duration" id={props.type+"-length"}>{props.duration}</span>

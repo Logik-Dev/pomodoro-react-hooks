@@ -50,7 +50,7 @@ const StyledTimer = styled.div`
 
 `
 const Display = styled.div`
-  background-color: #333;
+  background-color: #eee;
   color: ${props => props.timeLeft <= 59 ? "red" : "yellowgreen"};
   width: 300px;
   margin: 0 auto;
@@ -59,7 +59,6 @@ const Display = styled.div`
   justify-content: center;
   flex-direction: column;
   font-size: 5rem;
-  border: 1px #ddd solid;
   border-radius: 8px;
   border-bottom: none;
   #timer-label{

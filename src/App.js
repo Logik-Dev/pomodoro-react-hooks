@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import styled from "styled-components";
 import Timer from './Timer';
 import TimeController from './TimeController';
-
+import accurateInterval from 'accurate-interval';
 
 const Wrapper = styled.div`
   min-height: 100vh;
@@ -14,17 +14,33 @@ const Wrapper = styled.div`
   "content";
 `
 const Header = styled.header`
+  @import url('https://fonts.googleapis.com/css?family=Carter+One');
   grid-area: header;
   background-color: #333;
   color: #eee;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: 'Carter One', cursive;
+  font-size: 1.8rem;
+  letter-spacing: 2px;
 `
 const Content = styled.main`
   grid-area: content;
 `
-
+const Footer = styled.footer`
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background-color: #333;
+  color: #fff;
+  font-style: italic;
+  padding: 1rem;
+  text-align: right;
+  a{
+    text-decoration: none;
+    color: inherit;
+  }
+`
 
 function App(props){
 
@@ -33,7 +49,7 @@ function App(props){
   const [isRunning, setIsRunning] = useState(false);
   const [isWorking, setIsWorking] = useState(true);
   const [timeLeft, setTimeLeft] = useState(isWorking ? durations.session * 60 : durations.break * 60);
-
+  const audioRef = useRef();
   // update timeLeft when changing durations
   useEffect(() => {
     setDurations({...durations, break: durations.break})
@@ -64,8 +80,8 @@ function App(props){
       };
       // passing a null delay will not start interval
       if(delay !== null){
-        const id = setInterval(callTick, 1000);
-        return () => clearInterval(id);
+        const id = accurateInterval(callTick, 1000);
+        return () => id.clear();
       }
     }, delay)
   }
@@ -82,13 +98,12 @@ function App(props){
 
   // handle start pause clicked
   function startPause(e){
-    
     setIsRunning(!isRunning);
-    
   }
 
   // handle end of timer
   function handleEndTimer(){
+    audioRef.current.play();
     setIsWorking(!isWorking);
     setTimeLeft(isWorking ? durations.break * 60 : durations.session * 60);
   }
@@ -106,6 +121,8 @@ function App(props){
     }
   }
   function reset(){
+    audioRef.current.pause();
+    audioRef.current.currentTime = 0;
     setIsRunning(false);
     setDurations({session: 25, break: 5});
     setIsWorking(true);
@@ -133,6 +150,8 @@ function App(props){
           dec={() => decrement(word)} 
           duration={durations[word]}/>)}
       </Content>
+      <audio src="http://onj3.andrelouis.com/phonetones/unzipped/Palm-Treo800W/Alarm5.wav" id="beep" preload="auto" ref={audioRef}/> 
+      <Footer>Created by <a href="https://logikdev.fr" target="_blank">LogikDev</a></Footer>
     </Wrapper>
   )
 }
