@@ -12,7 +12,8 @@ const Wrapper = styled.div`
   grid-gap: 2rem;
   grid-template-areas:
   "header"
-  "content";
+  "content"
+  "footer";
 `
 const Header = styled.header`
   @import url('https://fonts.googleapis.com/css?family=Carter+One');
@@ -30,8 +31,7 @@ const Content = styled.main`
   grid-area: content;
 `
 const Footer = styled.footer`
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
+  grid-area: footer;
   background-color: #333;
   color: #fff;
   font-style: italic;
