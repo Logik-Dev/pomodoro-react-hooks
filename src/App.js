@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import ReactDOM from 'react-dom';
 import styled from "styled-components";
 import Timer from './Timer';
 import TimeController from './TimeController';
@@ -42,14 +43,14 @@ const Footer = styled.footer`
   }
 `
 
-function App(props){
-
+function App(){
   // Definitions
   const [durations, setDurations] = useState({break: 5, session: 25});
   const [isRunning, setIsRunning] = useState(false);
   const [isWorking, setIsWorking] = useState(true);
   const [timeLeft, setTimeLeft] = useState(isWorking ? durations.session * 60 : durations.break * 60);
   const audioRef = useRef();
+
   // update timeLeft when changing durations
   useEffect(() => {
     setDurations({...durations, break: durations.break})
@@ -64,6 +65,7 @@ function App(props){
       isWorking ? setTimeLeft(durations.session * 60) : setTimeLeft(durations.break * 60);
     }
   }, [durations])
+
   // define custom hook 
   function useInterval(callback, delay){
     const savedCallback = useRef();
@@ -85,6 +87,7 @@ function App(props){
       }
     }, delay)
   }
+  
   // use custom hook
   useInterval(()=> {
     if(timeLeft > 0){
@@ -156,6 +159,5 @@ function App(props){
   )
 }
 
-
-
-export default App;
+ReactDOM.render(<App />,
+  document.getElementById('root'));

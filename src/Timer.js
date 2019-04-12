@@ -29,7 +29,7 @@ const StyledTimer = styled.div`
     &:hover{
       background-color: deeppink;
       color: #fff;
-      transform: scale(1.3);
+      transform: scale(1.2);
       transition: color .3s, background-color .3s, box-shadow .2s, transform .2s;
       box-shadow: -5px 2px 4px rgba(0,0,0,.4);
 
